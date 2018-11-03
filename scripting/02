@@ -1,0 +1,6 @@
+#!/bin/bash
+
+#Edit crontab with commande "sudo crontab -e -u root"
+#Put this in the crontab "0 4 * * 1 /bin/bash /git/init/scripting/02"
+
+/usr/bin/apt-get update >> /var/log/update_script.log 2>&1 && /usr/bin/apt-get upgrade >> /var/log/update_script.log 2>&1

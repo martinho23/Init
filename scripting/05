@@ -1,0 +1,4 @@
+#!/bin/bash
+
+LOVE_N_LIFE=42
+echo $LOVE_N_LIFE

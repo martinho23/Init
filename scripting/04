@@ -1,0 +1,23 @@
+#!/in/bash
+
+#Edit crontab with "sudo corntab -e -u root"
+#Add this: "0 0 * * * /bin/bash /git/init/scripting/04" to crontab
+
+DIR=/var/md5sum
+FILE=/var/md5sum/crontab.md5sum
+
+if [ ! -d $DIR ]; then
+	/bin/mkdir $DIR
+#	/bin/chmod 755 $DIR
+fi
+
+if [ -f FILE ]; then
+	MD5=$(cat $FILE)
+else
+	/usr/bin/md5sum /etc/crontab | cut -d" " -f1 > $FILE
+fi
+NEWMD5=$(md5sum /etc/crontab | cut -d" " -f1)
+if [ MD5 != NEWMD5 ]; then
+	echo "Crontab was modified" | mail -s "Alert Crontab" root
+	echo $NEWMD5 > $FILE
+fi
