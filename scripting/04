@@ -13,9 +13,9 @@ fi
 if [ -f $FILE ]; then
 	MD5=$(/bin/cat $FILE)
 else
-	/usr/bin/md5sum /etc/crontab | /bin/cut -d" " -f1 > $FILE
+	/usr/bin/md5sum /etc/crontab | /usr/bin/cut -d" " -f1 > $FILE
 fi
-NEWMD5=$(/usr/bin/md5sum /etc/crontab | /bin/cut -d" " -f1)
+NEWMD5=$(/usr/bin/md5sum /etc/crontab | /usr/bin/cut -d" " -f1)
 if [ $MD5 != $NEWMD5 ]; then
 	/bin/echo "Crontab was modified" | /usr/bin/mail -s "Alert Crontab" root
 	/bin/echo $NEWMD5 > $FILE
